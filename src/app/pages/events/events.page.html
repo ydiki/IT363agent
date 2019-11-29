@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input required type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type="date" placeholder="createdAt" [(ngModel)]="event.createdAt"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="saveEvent()">Save</ion-button>
+</ion-content>
