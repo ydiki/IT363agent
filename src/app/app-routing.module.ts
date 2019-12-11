@@ -12,6 +12,14 @@ const routes: Routes = [
     path: 'events/:id',
     loadChildren: () => import('./pages/events/events.module').then( m => m.EventsPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'home-login',
+    loadChildren: () => import('./home-login/home-login.module').then( m => m.HomeLoginPageModule)
+  },
 ];
 
 @NgModule({

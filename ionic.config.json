@@ -1,5 +1,7 @@
 {
   "name": "reminder",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
