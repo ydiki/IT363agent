@@ -90,7 +90,6 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-googleplus": {
         "WEB_APPLICATION_CLIENT_ID": "1092298140547-p14j7di6e69duk5jfvbu0ju7or6jqtjg.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
@@ -98,6 +97,7 @@
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-apiai": {},
       "cordova-plugin-speechrecognition": {}
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android"

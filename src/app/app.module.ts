@@ -20,6 +20,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { StorageServiceModule} from 'angular-webstorage-service';
 
+import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,6 +36,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
     SplashScreen,
     TextToSpeech,
     GooglePlus,
+    InAppBrowser,
     NativeStorage,
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
