@@ -59,9 +59,6 @@ export class LoginPage implements OnInit {
   };
 
 
-
-
-
   onLoginSuccess(accessToken, accessSecret) {
     const credential = accessSecret ? 
     firebase.auth.GoogleAuthProvider.credential(accessToken, accessSecret) : 

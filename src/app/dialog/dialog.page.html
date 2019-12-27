@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Event Reminder
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+ <ion-content>
+
+  <ion-item>
+    <ion-input (keyup.enter)="sendText($event.target.value)" type="text" placeholder="Enter input"></ion-input>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="changeRecordState(); recordState ? stopVoice() : sendVoice();" class="round-icon-btn" size="large" shape="round">
+         <ion-icon [name]="recordState ? 'microphone' : 'radio-button-on'"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+
+  <ion-item>
+    <ion-label>
+      {{test}}
+      <!-- {{resolvedQuery}} -->
+    </ion-label>
+  </ion-item>
+<!-- 
+  <ion-button (click)="changeRecordState(); recordState ? stopVoice() : sendVoice();" class="round-icon-btn" size="large" shape="round">
+    <ion-icon [name]="recordState ? 'microphone' : 'radio-button-on'" slot="icon-only"></ion-icon>
+  </ion-button>
+   -->
+
+
+  
+
+</ion-content>

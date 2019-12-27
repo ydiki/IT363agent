@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { DialogPageRoutingModule } from './dialog-routing.module';
 
-import { HomeLoginPageRoutingModule } from './home-login-routing.module';
-
-import { HomeLoginPage } from './home-login.page';
+import { DialogPage } from './dialog.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeLoginPageRoutingModule
+    DialogPageRoutingModule
   ],
-  declarations: [HomeLoginPage]
+  declarations: [DialogPage]
 })
-export class HomeLoginPageModule {}
+export class DialogPageModule {}

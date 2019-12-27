@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Chatbot
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+
+<ion-content class="ion-padding">
+  <ng-container *ngFor="let message of messages | async">
+    <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+                                        'to': message.sentBy === 'user' }">
+    {{ message.content }}
+    </div>
+  </ng-container>
+
+  <ion-row style="position:fixed; bottom:30px;">
+    <ion-col>
+      <label for="nameField"></label>
+      <ion-input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" placeholder="Write here something ..."></ion-input>
+   
+     <ion-button class="log-in-button" color="primary" expand="block" (click)="sendMessage()">
+       Send
+     </ion-button>
+    </ion-col>
+  </ion-row>
+   
+
+ </ion-content>
