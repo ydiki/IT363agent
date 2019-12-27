@@ -2,27 +2,37 @@
 Remindr ChatBot Agent
 
 Required Tools :
-ionic :
-npm install -g ionic cordova
+ionic : npm install -g ionic cordova
 
-First install dependencies :  
-npm install
+First install dependencies :  npm install
 
-add your Firebase configuration into src/environments/environment.ts as follows :
+Attention :
+- add your Firebase configuration into src/environments/environment.ts as follows :
+- add also your access tocken for DialogFlow 
+
 
 export const environment = {
   production: false,
+  dialogFlow: {
+      chatbot: 'XXXXXXXXXXXXXXXXXXXXX'
+    },
   firebase: {
-    apiKey: '<your-key>',
-    authDomain: '<your-project-authdomain>',
-    databaseURL: '<your-database-URL>',
-    projectId: '<your-project-id>',
-    storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    apiKey: 'XXXXXXXXXXXX',
+    authDomain: ''XXXXXXXXXXXX'',
+    databaseURL: ''XXXXXXXXXXXX'',
+    projectId: ''XXXXXXXXXXXX'',
+    storageBucket: ''XXXXXXXXXXXX'',
+    messagingSenderId: ''XXXXXXXXXXXX''
   }
 };
 
+
+
 then run : 
 ionic serve
-
 go to localhost:8100
+
+Run on Android Studio:
+ionic cordova emulate android -lc
+
+
