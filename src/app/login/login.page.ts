@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
         this.storageAuth.setAccessToken(accessToken); 
         this.storageAuth.setToken(id_token); 
         this.onLoginSuccess(id_token,accessToken);
-        this.googlaAuth.googleProfileInfo(response).
+        this.googlaAuth.getGoogleProfileInfo(response).
         subscribe(profileResp=>{
           console.log(profileResp);
           this.storageAuth.setEmail(profileResp.email);
@@ -61,10 +61,11 @@ export class LoginPage implements OnInit {
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
         console.log(response);
-        this.router.navigate(["/sidebar/events-list"]);
+        this.router.navigate(["/sidebar/profil"]);
       })
 
   }
+
   onLoginError(err) {
     console.log(err);
   }

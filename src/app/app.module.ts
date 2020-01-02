@@ -27,10 +27,11 @@ import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
   entryComponents: [],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(),
     AngularFireAuthModule,
-    AppRoutingModule,
     StorageServiceModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule],
+    AngularFirestoreModule,
+    AppRoutingModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

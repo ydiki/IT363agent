@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogflowService, Message } from '../services/dialogflow.service';
+import { DialogflowService, Message } from '../../services/dialogflow.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/scan';
 

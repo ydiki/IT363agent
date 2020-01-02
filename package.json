@@ -42,6 +42,7 @@
     "ionic-angular": "^3.9.9",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.3",
+    "sweetalert": "^2.1.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
@@ -96,7 +97,7 @@
       },
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-apiai": {},
-      "cordova-plugin-speechrecognition": {}
+      "cordova-plugin-speechrecognition": {},
       "cordova-plugin-inappbrowser": {}
     },
     "platforms": [

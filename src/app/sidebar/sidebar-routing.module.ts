@@ -6,18 +6,19 @@ import { SidebarPage } from './sidebar.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/sidebar/profile',
+    redirectTo: '/sidebar/profil',
     pathMatch: 'full'
   },
   {
     path: '',
     component: SidebarPage,
     children: [
-      { path: 'profil', loadChildren: '../pages/profil/profil.module#ProfilPageModule' },
-      { path: 'home', loadChildren: '../home/home.module#HomePageModule' },
-      { path: 'events-list', loadChildren: '../pages/events-list/events-list.module#EventsListPageModule'},
-      { path: 'events', loadChildren: '../pages/events/events.module#EventsPageModule'},
-      { path: 'events/:id',loadChildren: '../pages/events/events.module#EventsPageModule'}
+      { path: 'profil', loadChildren: ()=> import('../pages/profil/profil.module').then( m => m.ProfilPageModule) },
+      { path: 'events-list', loadChildren: () => import('../pages/events-list/events-list.module').then( m => m.EventsListPageModule) },
+      { path: 'events', loadChildren: () => import('../pages/events/events.module').then( m => m.EventsPageModule) },
+      { path: 'events/:id', loadChildren: () => import('../pages/events/events.module').then( m => m.EventsPageModule)},
+      { path: 'dialog', loadChildren: () => import('../pages/dialog/dialog.module').then( m => m.DialogPageModule)},
+      { path: 'dialogchat', loadChildren: () => import('../pages/dialog-chat/dialog-chat.module').then( m => m.DialogChatPageModule) },
     ]
   }
 ];

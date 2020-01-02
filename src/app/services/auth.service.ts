@@ -1,6 +1,7 @@
 import { Inject,Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 declare var window: any;
 @Injectable()
 export class AuthService {
@@ -10,7 +11,7 @@ export class AuthService {
   public googleLogin(): Promise<any> {
 
     return new Promise(function (resolve, reject) {
-      const clientId = "1092298140547-p14j7di6e69duk5jfvbu0ju7or6jqtjg.apps.googleusercontent.com";
+      const clientId = environment.googleApi.clientId;
       const url = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}`+
          "&redirect_uri=http://localhost:8100" +
            "&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/plus.login"+
@@ -48,10 +49,10 @@ export class AuthService {
     });
   }
 
-  googleProfileInfo(response): Observable<any>{
+  getGoogleProfileInfo(response): Observable<any>{
     console.log(response);
-    const {tokenId,access_token} = response;
-    console.log(tokenId,access_token);
+    const {id_token,access_token} = response;
+    console.log(id_token,access_token);
     const url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json"+
     `&access_token=${access_token}`
     return this.http.get(url);
