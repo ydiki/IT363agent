@@ -20,20 +20,24 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { StorageServiceModule} from 'angular-webstorage-service';
 
+import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(),
     AngularFireAuthModule,
-    AppRoutingModule,
     StorageServiceModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule],
+    AngularFirestoreModule,
+    AppRoutingModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     TextToSpeech,
     GooglePlus,
+    InAppBrowser,
     NativeStorage,
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

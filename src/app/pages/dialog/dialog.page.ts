@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { NgZone } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import {StorageServiceService}  from '../../services/storage-service.service';
 
 declare var ApiAIPlugin: any;
 
@@ -22,14 +23,15 @@ export class DialogPage {
   constructor(
     public platform: Platform, 
     public ngZone: NgZone,
-    private tts: TextToSpeech
+    private tts: TextToSpeech,
+    private storageAuth:StorageServiceService, 
   ) {
-
+    console.log(this.storageAuth.getAccessToken());
     platform.ready().then(() => {
       console.log("platform ready");
       ApiAIPlugin.init(
         {
-            clientAccessToken: "b66aa19735074425a09707bb7a2093eb", // insert your client access key here
+            clientAccessToken: this.storageAuth.getAccessToken(), // insert your client access key here
             lang: "en" // set lang tag from list of supported languages
         },
         () => console.log("success"),

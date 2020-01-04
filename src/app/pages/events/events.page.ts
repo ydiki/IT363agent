@@ -11,7 +11,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 })
 export class EventsPage implements OnInit {
   event : Event = {
-    title : 'test',
+    title : '',
     createdAt: new Date().getTime(),
     };
 
@@ -48,12 +48,12 @@ export class EventsPage implements OnInit {
     if (this.eventId) {
       this.eventService.updateEvent(this.event, this.eventId).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('home');
+        this.nav.navigateBack('sidebar/events-list');
       });
     } else {
       this.eventService.addEvent(this.event).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('home');
+        this.nav.navigateBack('sidebar/events-list');
       });
     }
   }

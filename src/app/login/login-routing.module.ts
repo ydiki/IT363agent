@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: LoginPage
-  }
+  },
+  {
+    path: 'sidebar/profil',
+    loadChildren: () => import('../pages/profil/profil.module').then( m => m.ProfilPageModule)
+  },
 ];
 
 @NgModule({

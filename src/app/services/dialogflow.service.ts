@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
+                                                                                                                                                                                                                                                                                                                                                                                      import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
+import {StorageServiceService}  from './storage-service.service';
 @Injectable({
   providedIn: 'root'
 })
 
 export class DialogflowService {
 
-  readonly token = environment.dialogFlow.chatbot;
+  readonly token  = environment.dialogFlow.chatbot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
   
-  constructor() { }
+  constructor( private storageAuth:StorageServiceService) {
+  //  this.token =  this.storageAuth.getAccessToken();
+   }
 
    
 // Adds message to source

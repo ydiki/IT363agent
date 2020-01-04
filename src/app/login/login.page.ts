@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
+import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
 import { AuthService } from '../services/auth.service'
 import {StorageServiceService}  from '../services/storage-service.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -14,8 +15,10 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  loading: any;
-  constructor(  public navCtrl: NavController,
+  // loading: any;
+  constructor(  
+    public navCtrl: NavController,
+    public iab: InAppBrowser,
     public googlaAuth: AuthService,
     private router: Router,
     private platform: Platform,
@@ -24,16 +27,8 @@ export class LoginPage implements OnInit {
     private storageAuth:StorageServiceService,
  ) { }
 
- async ngOnInit() {
+ ngOnInit() {
     console.log(window);
-    this.loading = await this.loadingController.create({
-      message: 'Connecting ...'
-    });
-  }
-
-
-  async presentLoading(loading) {
-    await loading.present();
   }
 
   public login() {
@@ -44,7 +39,7 @@ export class LoginPage implements OnInit {
         this.storageAuth.setAccessToken(accessToken); 
         this.storageAuth.setToken(id_token); 
         this.onLoginSuccess(id_token,accessToken);
-        this.googlaAuth.googleProfileInfo(response).
+        this.googlaAuth.getGoogleProfileInfo(response).
         subscribe(profileResp=>{
           console.log(profileResp);
           this.storageAuth.setEmail(profileResp.email);
@@ -66,15 +61,15 @@ export class LoginPage implements OnInit {
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
         console.log(response);
-        this.router.navigate(["/home"]);
-        this.loading.dismiss();
+        this.router.navigate(["/sidebar/profil"]);
       })
 
   }
+
   onLoginError(err) {
     console.log(err);
   }
-
-
  
+
+
 }

@@ -19,6 +19,7 @@ export class EventService {private eventsCollection: AngularFirestoreCollection<
   private events: Observable<Event[]>;
  
   constructor(db: AngularFirestore) {
+    console.log("events Service starts")
     this.eventsCollection = db.collection<Event>('events');
  
     this.events = this.eventsCollection.snapshotChanges().pipe(
@@ -30,6 +31,19 @@ export class EventService {private eventsCollection: AngularFirestoreCollection<
         });
       })
     );
+  }
+
+  refreshEvents() {
+    this.events = this.eventsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.events;
   }
  
   getEvents() {

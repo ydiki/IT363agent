@@ -1,4 +1,4 @@
-import { Inject,Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
@@ -12,6 +12,17 @@ export class StorageServiceService {
 
 
 
+  clearStorage() {
+
+    this.storage.remove("email");
+    this.storage.remove("imageUrl");
+    this.storage.remove("name");
+    this.storage.remove("ident");
+    this.storage.remove("access_token");
+    this.storage.remove("token");
+    this.storage.remove("email");
+  }
+
   setEmail(email: string) {
 
     console.log('recieved= Email:' + 'value:' + email);
@@ -20,8 +31,7 @@ export class StorageServiceService {
   }
 
   getPicture() {
-    return this.storage.get("email");
-
+    return this.storage.get("imageUrl");
   }
 
 
