@@ -74,7 +74,7 @@ export class StorageServiceService {
 
   getAccessToken() {
 
-    this.storage.get("access_token");
+   return this.storage.get("access_token");
 
   }
 
