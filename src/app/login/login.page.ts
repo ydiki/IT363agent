@@ -35,10 +35,12 @@ export class LoginPage implements OnInit {
     this.platform.ready()
       .then(this.googlaAuth.googleLogin)
       .then(response => {
-        const { id_token, accessToken } = response;
-        this.storageAuth.setAccessToken(accessToken); 
+        const { id_token, access_token } = response;
+        this.storageAuth.setAccessToken(access_token); 
+        console.log( "id_token",id_token);
         this.storageAuth.setToken(id_token); 
-        this.onLoginSuccess(id_token,accessToken);
+        console.log( "this.storageAuth.getToken()",this.storageAuth.getToken());
+        this.onLoginSuccess(id_token,access_token);
         this.googlaAuth.getGoogleProfileInfo(response).
         subscribe(profileResp=>{
           console.log(profileResp);
@@ -46,7 +48,6 @@ export class LoginPage implements OnInit {
           this.storageAuth.setName(profileResp.name);
           this.storageAuth.setPicture(profileResp.picture);
           this.storageAuth.setId(profileResp.id);        
-          this.storageAuth.setToken(profileResp.id);        
         });
       }, (error) => {
         alert(error);

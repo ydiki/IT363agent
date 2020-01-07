@@ -27,9 +27,24 @@ export class DialogflowService {
 converse(msg: string) {
   const userMessage = new Message(msg, 'user');
   this.update(userMessage);
-
-
-  return this.client.textRequest(msg)
+  
+  const options = {
+   sessionId: 'session______id',
+  //  resetContexts : true, 
+   contexts:[{
+     name : 'token',
+     parameters: {
+      access_token : this.storageAuth.getAccessToken(),
+      idToken : this.storageAuth.getToken(),
+     },
+     lifespan:4,
+   }]
+    
+  }
+  console.log(this.storageAuth.getAccessToken(),"\n",this.storageAuth.getToken());
+  
+  console.log(this.client.textRequest(msg,options));
+  return this.client.textRequest(msg,options)
     .then(res => {
       const speech = res.result.fulfillment.speech;
       const botMessage = new Message(speech, 'bot');
