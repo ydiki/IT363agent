@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogflowService, Message } from '../../services/dialogflow.service';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/scan';
+
+
 
 @Component({
   selector: 'app-dialog-chat',
@@ -14,13 +17,18 @@ export class DialogChatPage implements OnInit {
   formValue: string;
  
  constructor(
-   private chat: DialogflowService,
- ) {}
+   private chat: DialogflowService,private tts: TextToSpeech
+ ) {
+
+  this.tts.speak('hello')
+  .then(() => console.log('Success'))
+  .catch((reason: any) => console.log(reason));
+ }
  
  ngOnInit() {
    // appends to array after each new message is added to feedSource
    this.messages = this.chat.conversation
-    .asObservable().scan((acc, val) => acc.concat(val));
+    .asObservable().scan((acc, val) => acc.concat(val))
   }
 
   sendMessage() {
@@ -28,4 +36,5 @@ export class DialogChatPage implements OnInit {
     this.formValue = '';
   }
 
+ 
 }

@@ -22,6 +22,7 @@ export class DialogflowService {
  update(msg: Message) {
   this.conversation.next([msg]);
 }
+
 // Sends and receives messages via dialogflow
 converse(msg: string) {
   const userMessage = new Message(msg, 'user');
