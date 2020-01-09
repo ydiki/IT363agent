@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                      import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -14,9 +14,7 @@ export class DialogflowService {
   conversation = new BehaviorSubject<Message[]>([]);
   
   constructor( private storageAuth:StorageServiceService) {
-  //  this.token =  this.storageAuth.getAccessToken();
    }
-
    
 // Adds message to source
  update(msg: Message) {
@@ -25,7 +23,8 @@ export class DialogflowService {
 
 // Sends and receives messages via dialogflow
 converse(msg: string) {
-  const userMessage = new Message(msg, 'user');
+  const date1 = new Date();
+  const userMessage = new Message(msg, 'user',date1.toISOString());
   this.update(userMessage);
   
   const options = {
@@ -41,13 +40,13 @@ converse(msg: string) {
    }]
     
   }
-  console.log(this.storageAuth.getAccessToken(),"\n",this.storageAuth.getToken());
-  
+
   console.log(this.client.textRequest(msg,options));
   return this.client.textRequest(msg,options)
     .then(res => {
       const speech = res.result.fulfillment.speech;
-      const botMessage = new Message(speech, 'bot');
+      const date2 = new Date();
+      const botMessage = new Message(speech, 'bot',date2.toISOString());
       this.update(botMessage);
     });
 }
@@ -55,6 +54,6 @@ converse(msg: string) {
 }
 
 export class Message {
-  constructor(public content: string, public sentBy: string) {}
+  constructor(public content: string, public sentBy: string,public date: string) {}
  }
  

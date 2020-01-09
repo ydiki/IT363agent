@@ -61,8 +61,7 @@ export class LoginPage implements OnInit {
     firebase.auth.GoogleAuthProvider.credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
-        console.log(response);
-        this.router.navigate(["/sidebar/profil"]);
+        this.router.navigate(["/sidebar/dialogchat"]);
       })
 
   }
