@@ -16,7 +16,7 @@ import { AuthService } from './services/auth.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AngularFireAuthModule  } from '@angular/fire/auth';  
 import { HttpClientModule } from '@angular/common/http';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx'; 
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { StorageServiceModule} from 'angular-webstorage-service';
 
@@ -36,7 +36,7 @@ import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
     StatusBar,
     SplashScreen,
     TextToSpeech,
-    GooglePlus,
+    SpeechRecognition,
     InAppBrowser,
     NativeStorage,
     AuthService,

@@ -25,6 +25,11 @@
       </div>
     </div>
     </div>
+  <ion-fab vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="start()" class="round-icon-btn" size="large" shape="round">
+        <ion-icon name="md-microphone"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-footer>
     <p text-center *ngIf="sending">sending...</p>
@@ -32,7 +37,7 @@
 
           <ion-input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" class="input_message" placeholder="Write here something .."></ion-input>
           <ion-icon (click)="sendMessage()" class="send" name="send"></ion-icon>
-          <ion-icon (click)="record()" class="send" name="md-microphone"></ion-icon>
+          <!-- <ion-icon (click)="start()" class="send" name="md-microphone"></ion-icon> -->
       </div>
   </ion-footer>
  </ion-content>

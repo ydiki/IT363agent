@@ -63,7 +63,7 @@ export class DialogPage {
  
     try {     
       
-      this.textToSpeech("trying");
+      //this.textToSpeech("trying");
 
       ApiAIPlugin.setListeningStartCallback(function () {
         console.log("listening started");

@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {StorageServiceService}  from './storage-service.service';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +15,27 @@ export class DialogflowService {
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
   
-  constructor( private storageAuth:StorageServiceService) {
+  constructor( 
+    private storageAuth:StorageServiceService,
+    private tts: TextToSpeech) {
    }
    
 // Adds message to source
  update(msg: Message) {
+  if(msg.sentBy == 'bot')
+    this.textToSpeech(msg.content);
   this.conversation.next([msg]);
+}
+
+   //transforms text to speech
+textToSpeech(text) {
+    console.log('texttospeech')
+    this.tts.speak({
+      text: text,
+      locale: 'en-GB',
+      rate: 0.8})
+      .then(() => console.log('Success'))
+      .catch((reason: any) => console.log(reason));
 }
 
 // Sends and receives messages via dialogflow
