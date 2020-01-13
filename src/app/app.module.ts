@@ -14,11 +14,13 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AuthService } from './services/auth.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { AngularFireAuthModule  } from '@angular/fire/auth';  
+import { AngularFireAuthModule  } from '@angular/fire/auth';
 import { HttpClientModule } from '@angular/common/http';
-import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx'; 
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { StorageServiceModule} from 'angular-webstorage-service';
+
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
 
@@ -40,6 +42,7 @@ import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
     InAppBrowser,
     NativeStorage,
     AuthService,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
