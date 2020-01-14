@@ -28,6 +28,10 @@ export class RemindersService {
     let timeLeftMs = new Date(timeStr).getTime() - new Date().getTime();
     timeLeftMs = timeLeftMs > 0 ? timeLeftMs : 0;
 
+    if(timeLeftMs <= 0){
+      return
+    }
+
     console.log(timeLeftMs)
 
     // registering a callback at the time of the reminder and saving the Timeout object
@@ -61,16 +65,19 @@ export class RemindersService {
 
   reminderCallBack(reminder){
     console.log("callback called")
+
+    //TODO
+
+
     // remove reminder from database
     //firebase.removeReminder(reminder.id)
 
-    //eventService
 
     // sending a notification to user
     this.localNotifications.schedule({
       id: 1,
-      title: "hi",
-      text : "1 hour left to the event",
+//      title: "hi",
+      text : "1 hour left to an event",
       foreground : true
     });
 

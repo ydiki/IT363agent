@@ -2,17 +2,17 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-      </ion-buttons>  
+      </ion-buttons>
     <ion-title>
       Reminders
     </ion-title>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content>
- 
+
   <ion-list>
- 
+
     <ng-container *ngIf="!events || events.length == 0">
       <div *ngFor="let n of [0,1,2]" padding>
         <ion-skeleton-text></ion-skeleton-text>
@@ -21,16 +21,16 @@
         </p>
       </div>
     </ng-container>
- 
+
     <ion-item-sliding *ngFor="let item of events">
       <ion-item lines="inset" button [routerLink]="['/events', item.id]">
         <ion-label>
           {{ item.startTime.toString() }}
           <!-- <p>{{ item| date:'short' }}</p> -->
         </ion-label>
-        <ion-note slot="end" color="primary">{{ item }}</ion-note>
+
       </ion-item>
- 
+
       <ion-item-options side="end">
         <ion-item-option (click)="remove(item)" color="danger">
           delete
@@ -38,8 +38,8 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
- 
+
   </ion-list>
- 
- 
+
+
 </ion-content>

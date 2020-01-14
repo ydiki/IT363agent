@@ -73,10 +73,10 @@ export class LoginPage implements OnInit {
     firebase.auth.GoogleAuthProvider.credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
+				this.eventService.initRef()
+				this.eventService.ref.on("child_added", this.remindersService.addReminder);
+				this.eventService.ref.on("child_removed", this.remindersService.removeReminder);
 
-				let a = this.eventService.ref.on("child_added", this.remindersService.addReminder);
-				//eventService.on("child_added", remindersService.addReminder)
-				//eventService.on("child_removed", remindersService.removeReminder)
         this.router.navigate(["/sidebar/dialogchat"]);
       })
 

@@ -16,7 +16,7 @@ export interface Event {
   providedIn: 'root'
 })
 export class EventService {
-   
+
   events:any[];
   userId:string;
   ref;
@@ -30,11 +30,21 @@ export class EventService {
       this.events = this.snapshotToArray(resp);
       console.log(this.events);
     });
- 
     }
 
+  initRef(){
+    this.userId = this.storageAuth.getId();
+    this.ref = firebase.database().ref(`users/${this.userId}/reminders`);
+    console.log(`users/${this.userId}/reminders`);
+    this.ref.on('value', resp => {
+      this.events = [];
+      this.events = this.snapshotToArray(resp);
+      console.log(this.events);
+    });
+  }
+
   refreshEvents() {
-   
+
     return new Promise((resolve,reject)=>{this.ref.on('value', resp => {
       this.events = [];
       console.log(resp);
@@ -44,23 +54,23 @@ export class EventService {
     });
   })
   }
- 
+
   getEvents() {
     return this.events;
   }
- 
+
   getEvent(id) {
     return this.events[id];
   }
- 
+
   updateEvent( id: string,eventId:string) {
     return firebase.database().ref(`users/${this.userId}/reminders/${id}`).set({eventId:eventId});
   }
- 
+
   addEvent(id:string,date:string) {
     return this.ref.push({eventId:id,startTime:date})
   }
- 
+
   removeEvent(id) {
    return  firebase.database().ref(`users/${this.userId}/reminders/${id}`).remove();
   }
@@ -68,7 +78,7 @@ export class EventService {
 
   snapshotToArray = snapshot => {
     let returnArr = [];
-    console.log("snapshot",snapshot);
+    //console.log("snapshot",snapshot);
     snapshot.forEach(childSnapshot => {
         let item = childSnapshot.val();
         let id = childSnapshot.key;
@@ -76,10 +86,10 @@ export class EventService {
   "July", "August", "September", "October", "November", "December"
 ];
         const date = new Date(item.startTime);
-        let string = String(date.getDate()) + " of " + monthNames[date.getMonth()] + " at " + date.getHours() + ":" + date.getMinutes();
-        console.log(":new Date(item.stratTime)",string);
+        let string =  String(date.getDate()) + " of " + monthNames[date.getMonth()] + " at " + (date.getHours() > 9 ? '' : '0') + date.getHours() + ":" + (date.getMinutes() > 9 ? '' : '0') + date.getMinutes();
+        //console.log(":new Date(item.stratTime)",string);
         let reminder = {id,eventId:item.eventId,startTime:string}
-        console.log("reminder",reminder);
+        //console.log("reminder",reminder);
         returnArr.push(reminder);
     });
 
