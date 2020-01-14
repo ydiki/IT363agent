@@ -33,7 +33,7 @@ export class SidebarPage implements OnInit {
       icon: 'ios-chatboxes'
     },
     {
-      title: 'reminders',
+      title: 'Reminders',
       url: '/sidebar/events-list',
       icon: 'ios-alarm'
     },

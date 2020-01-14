@@ -29,7 +29,6 @@ export class DialogflowService {
 
    //transforms text to speech
 textToSpeech(text) {
-    console.log('texttospeech')
     this.tts.speak({
       text: text,
       locale: 'en-GB',
