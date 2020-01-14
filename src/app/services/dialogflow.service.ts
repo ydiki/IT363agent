@@ -14,12 +14,12 @@ export class DialogflowService {
   readonly token  = environment.dialogFlow.chatbot;
   readonly client = new ApiAiClient({accessToken: this.token});
   conversation = new BehaviorSubject<Message[]>([]);
-  
-  constructor( 
+
+  constructor(
     private storageAuth:StorageServiceService,
     private tts: TextToSpeech) {
    }
-   
+
 // Adds message to source
  update(msg: Message) {
   if(msg.sentBy == 'bot')
@@ -42,10 +42,10 @@ converse(msg: string) {
   const date1 = new Date();
   const userMessage = new Message(msg, 'user',date1.toISOString());
   this.update(userMessage);
-  
+
   const options = {
    sessionId: 'session______id',
-  //  resetContexts : true, 
+  //  resetContexts : true,
    contexts:[{
      name : 'token',
      parameters: {
@@ -55,10 +55,10 @@ converse(msg: string) {
      },
      lifespan:4,
    }]
-    
+
   }
 
-  console.log(this.client.textRequest(msg,options));
+  
   return this.client.textRequest(msg,options)
     .then(res => {
       const speech = res.result.fulfillment.speech;
@@ -73,4 +73,3 @@ converse(msg: string) {
 export class Message {
   constructor(public content: string, public sentBy: string,public date: string) {}
  }
- 
