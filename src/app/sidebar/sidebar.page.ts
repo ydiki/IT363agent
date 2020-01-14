@@ -28,12 +28,7 @@ export class SidebarPage implements OnInit {
       icon: 'contact'
     },
     {
-      title: 'dialog',
-      url: '/sidebar/dialog',
-      icon: 'list-box'
-    },
-    {
-      title: 'dialogchat',
+      title: 'Dialog',
       url: '/sidebar/dialogchat',
       icon: 'list-box'
     },
