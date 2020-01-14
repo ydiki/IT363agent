@@ -52,6 +52,7 @@ converse(msg: string) {
      parameters: {
       access_token : this.storageAuth.getAccessToken(),
       idToken : this.storageAuth.getToken(),
+      id : this.storageAuth.getId(),
      },
      lifespan:4,
    }]

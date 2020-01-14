@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+// import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import * as firebase from 'firebase';
 
 export interface Event {
   id?: string;
@@ -14,35 +14,28 @@ export interface Event {
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {private eventsCollection: AngularFirestoreCollection<Event>;
- 
-  private events: Observable<Event[]>;
- 
-  constructor(db: AngularFirestore) {
+export class EventService {
+  
+  private events;
+  
+  ref = firebase.database().ref('reminders');
+  constructor() {
     console.log("events Service starts")
-    this.eventsCollection = db.collection<Event>('events');
+
+    this.ref.on('value', resp => {
+      this.events = [];
+      this.events = this.snapshotToArray(resp);
+    });
+    // this.eventsCollection = db.collection<Event>('events');
  
-    this.events = this.eventsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
-  }
+    }
 
   refreshEvents() {
-    this.events = this.eventsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+   
+    this.ref.on('value', resp => {
+      this.events = [];
+      this.events = this.snapshotToArray(resp);
+    });
     return this.events;
   }
  
@@ -51,18 +44,33 @@ export class EventService {private eventsCollection: AngularFirestoreCollection<
   }
  
   getEvent(id) {
-    return this.eventsCollection.doc<Event>(id).valueChanges();
+    return this.events[id];
   }
  
   updateEvent(Event: Event, id: string) {
-    return this.eventsCollection.doc(id).update(Event);
+    return this.ref.push().set({reminder:"updated"});
+    // return this.eventsCollection.doc(id).update(Event);
   }
  
   addEvent(Event: Event) {
-    return this.eventsCollection.add(Event);
+    return this.ref.push().set({reminder:"updated"})
+    // return this.eventsCollection.add(Event);
   }
  
   removeEvent(id) {
-    return this.eventsCollection.doc(id).delete();
+    // return this.eventsCollection.doc(id).delete();
   }
+
+
+  snapshotToArray = snapshot => {
+    let returnArr = [];
+    console.log("snapshot",snapshot);
+    snapshot.forEach(childSnapshot => {
+        let item = childSnapshot.val();
+        console.log("item",item);
+        returnArr.push(item);
+    });
+
+    return returnArr;
+};
 }

@@ -30,7 +30,7 @@ import {  InAppBrowser} from '@ionic-native/in-app-browser/ngx'
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(),
     AngularFireAuthModule,
     StorageServiceModule,
-    AngularFireModule.initializeApp(environment.firebase),
+     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AppRoutingModule
   ],

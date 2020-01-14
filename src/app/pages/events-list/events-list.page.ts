@@ -9,15 +9,13 @@ import {Event, EventService} from '../../services/events.service'
 export class EventsListPage implements OnInit {
 
 
-  events:Event[];
+  events;
   constructor(private eventService:EventService) {
   }
   ngOnInit() {
     console.log("start");
-    this.eventService.refreshEvents().subscribe(res => {
-      console.log(res);
-      this.events = res;
-    });
+    this.events = this.eventService.getEvents();
+   console.log("events",this.events); 
   }
  
   remove(item) {
