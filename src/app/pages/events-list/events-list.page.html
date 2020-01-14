@@ -25,8 +25,8 @@
     <ion-item-sliding *ngFor="let item of events">
       <ion-item lines="inset" button [routerLink]="['/events', item.id]">
         <ion-label>
-          {{ item }}
-          <p>{{ item| date:'short' }}</p>
+          {{ item.startTime.toString() }}
+          <!-- <p>{{ item| date:'short' }}</p> -->
         </ion-label>
         <ion-note slot="end" color="primary">{{ item }}</ion-note>
       </ion-item>

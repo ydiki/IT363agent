@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 // import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {StorageServiceService}  from '../services/storage-service.service';
 import * as firebase from 'firebase';
 
 export interface Event {
@@ -15,28 +16,33 @@ export interface Event {
   providedIn: 'root'
 })
 export class EventService {
-  
-  private events;
-  
-  ref = firebase.database().ref('reminders');
-  constructor() {
+   
+  events:any[];
+  userId:string;
+  ref;
+  constructor( private storageAuth:StorageServiceService) {
     console.log("events Service starts")
-
+    this.userId = this.storageAuth.getId();
+    this.ref = firebase.database().ref(`users/${this.userId}/reminders`);
+    console.log(`users/${this.userId}/reminders`);
     this.ref.on('value', resp => {
       this.events = [];
       this.events = this.snapshotToArray(resp);
+      console.log(this.events);
     });
-    // this.eventsCollection = db.collection<Event>('events');
  
     }
 
   refreshEvents() {
    
-    this.ref.on('value', resp => {
+    return new Promise((resolve,reject)=>{this.ref.on('value', resp => {
       this.events = [];
+      console.log(resp);
       this.events = this.snapshotToArray(resp);
+      console.log("events",this.events);
+    resolve(this.events);
     });
-    return this.events;
+  })
   }
  
   getEvents() {
@@ -47,18 +53,16 @@ export class EventService {
     return this.events[id];
   }
  
-  updateEvent(Event: Event, id: string) {
-    return this.ref.push().set({reminder:"updated"});
-    // return this.eventsCollection.doc(id).update(Event);
+  updateEvent( id: string,eventId:string) {
+    return firebase.database().ref(`users/${this.userId}/reminders/${id}`).set({eventId:eventId});
   }
  
-  addEvent(Event: Event) {
-    return this.ref.push().set({reminder:"updated"})
-    // return this.eventsCollection.add(Event);
+  addEvent(id:string,date:string) {
+    return this.ref.push({eventId:id,startTime:date})
   }
  
   removeEvent(id) {
-    // return this.eventsCollection.doc(id).delete();
+   return  firebase.database().ref(`users/${this.userId}/reminders/${id}`).remove();
   }
 
 
@@ -67,8 +71,16 @@ export class EventService {
     console.log("snapshot",snapshot);
     snapshot.forEach(childSnapshot => {
         let item = childSnapshot.val();
-        console.log("item",item);
-        returnArr.push(item);
+        let id = childSnapshot.key;
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+        const date = new Date(item.startTime);
+        let string = String(date.getDate()) + " of " + monthNames[date.getMonth()] + " at " + date.getHours() + ":" + date.getMinutes();
+        console.log(":new Date(item.stratTime)",string);
+        let reminder = {id,eventId:item.eventId,startTime:string}
+        console.log("reminder",reminder);
+        returnArr.push(reminder);
     });
 
     return returnArr;

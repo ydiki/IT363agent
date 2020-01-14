@@ -9,17 +9,28 @@ import {Event, EventService} from '../../services/events.service'
 export class EventsListPage implements OnInit {
 
 
+  //events;
   events;
+  userId:string;
+  ref;
   constructor(private eventService:EventService) {
+    console.log("start");
+    var self =this;
+    this.eventService.refreshEvents().then(res => {
+      this.events = res;
+      console.log("res",res)});
+    console.log("events",this.eventService.getEvents()); 
   }
   ngOnInit() {
-    console.log("start");
-    this.events = this.eventService.getEvents();
-   console.log("events",this.events); 
+  
   }
  
   remove(item) {
     this.eventService.removeEvent(item.id);
+    this.eventService.refreshEvents().then(res => {
+      this.events = res;
+      console.log("res",res)});
+    
   }
 
 }

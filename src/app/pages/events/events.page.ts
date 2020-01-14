@@ -46,12 +46,12 @@ export class EventsPage implements OnInit {
     await loading.present();
  
     if (this.eventId) {
-      this.eventService.updateEvent(this.event, this.eventId).then(() => {
+      this.eventService.updateEvent( this.eventId,"test").then(() => {
         loading.dismiss();
         this.nav.navigateBack('sidebar/events-list');
       });
     } else {
-      this.eventService.addEvent(this.event).then(() => {
+      this.eventService.addEvent(this.eventId,"test").then(() => {
         loading.dismiss();
         this.nav.navigateBack('sidebar/events-list');
       });
