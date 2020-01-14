@@ -1,12 +1,9 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
-    <ion-title>Chatbot </ion-title>
-  </ion-toolbar>
+
 </ion-header> 
 
  
-<ion-content class="ion-padding">
+<ion-content class="ion-padding colorback" >
   <div class="chats">
     <div class="chatbox">
       <div *ngFor="let message of messages | async">
@@ -31,13 +28,11 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-footer>
+  <ion-footer >
     <p text-center *ngIf="sending">sending...</p>
-        <div class="flex-items" padding>
-
+        <div class="flex-items" style="border-radius:18px;"  padding>
           <ion-input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" class="input_message" placeholder="Write here something .."></ion-input>
           <ion-icon (click)="sendMessage()" class="send" name="send"></ion-icon>
-          <!-- <ion-icon (click)="start()" class="send" name="md-microphone"></ion-icon> -->
       </div>
   </ion-footer>
  </ion-content>

@@ -3,6 +3,7 @@
     justify-content: space-around;
     background-color: #fff;
 }
+
 .icon{
     font-size: 50px;
     opacity: 0.5;
@@ -114,6 +115,11 @@
 .round-icon-btn {
   --border-radius: 100px;
   --color:BLACK;
-  --background: #9ec4e9;
+  --background: #ffffff;
   --background-activated: #e996a8;
+}
+
+
+.colorback{
+  --ion-background-color: rgb(241, 239, 239)!important;
 }

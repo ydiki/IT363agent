@@ -1,4 +1,4 @@
-<ion-menu contentId="content" type="reveal">
+<ion-menu contentId="content" type="reveal" >
   <ion-header >
       <ion-toolbar class="user-profile">
   
@@ -12,7 +12,6 @@
             <ion-col padding-top col-8>
               <h2 ion-text class="no-margin bold text-white">
                   {{ username }}
-         
                 </h2>
               <span ion-text color="primary"> Account</span>
             </ion-col>
@@ -36,21 +35,7 @@
         
       </ion-item>
     </ion-menu-toggle>
-    <!-- projects components -->
-    <!-- <ion-item  *ngIf="p.title=='My projects'">
-        <ion-icon slot="start"  name="filing" *ngIf="!p.open"></ion-icon>
-        <ion-label button (click)="myprojects()" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">{{ p.title }}</ion-label>
-     
-      <ion-icon slot="end"  button (click)="presentAlert()" name="add" *ngIf="p.title=='My projects'" ></ion-icon>
-    </ion-item> -->
-    <!-- Children List for clicked Item -->
-    <!-- <ion-list *ngIf="p.open">
-      <ion-menu-toggle>
-        <ion-item *ngFor="let sub of p.child" class="sub-item">
-          <app-project [name]="sub.title" [id]="sub._id"></app-project>
-        </ion-item>
-      </ion-menu-toggle>
-    </ion-list> -->
+  
 
   </div>
 

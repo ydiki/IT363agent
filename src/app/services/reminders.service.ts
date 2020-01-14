@@ -10,6 +10,7 @@ export class RemindersService {
 
   constructor( private localNotifications: LocalNotifications ) {
     console.log("reminders service instanciated")
+
   }
 
   addReminder(databaseReminder) {

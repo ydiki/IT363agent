@@ -39,9 +39,8 @@ export class LoginPage implements OnInit {
       .then(response => {
         const { id_token, access_token } = response;
         this.storageAuth.setAccessToken(access_token);
-        console.log( "id_token",id_token);
         this.storageAuth.setToken(id_token);
-        console.log( "this.storageAuth.getToken()", this.storageAuth.getToken());
+        this.showLoader();
         this.onLoginSuccess(id_token,access_token);
         this.googlaAuth.getGoogleProfileInfo(response).
         subscribe(profileResp=>{
@@ -56,6 +55,14 @@ export class LoginPage implements OnInit {
       }).then();
   }; 
 
+  showLoader() {
+    this.loadingController.create({
+      message: 'Please wait ...',
+      duration: 2000
+    }).then((res) => {
+      res.present();
+    });
+  }
 
   onLoginSuccess(accessToken, accessSecret) {
     const credential = accessSecret ?
