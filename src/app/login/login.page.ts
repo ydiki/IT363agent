@@ -8,6 +8,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { LoadingController } from '@ionic/angular';
+import {EventService} from '../services/events.service';
+
 	declare var window: any;
 
 @Component({
@@ -27,6 +29,7 @@ export class LoginPage implements OnInit {
     private fireAuth: AngularFireAuth,
     private storageAuth:StorageServiceService,
 		private remindersService : RemindersService,
+		private eventService: EventService,
  ) { }
 
  ngOnInit() {
@@ -53,7 +56,7 @@ export class LoginPage implements OnInit {
       }, (error) => {
         alert(error);
       }).then();
-  }; 
+  };
 
   showLoader() {
     this.loadingController.create({
@@ -70,6 +73,10 @@ export class LoginPage implements OnInit {
     firebase.auth.GoogleAuthProvider.credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
+
+				let a = this.eventService.ref.on("child_added", this.remindersService.addReminder);
+				//eventService.on("child_added", remindersService.addReminder)
+				//eventService.on("child_removed", remindersService.removeReminder)
         this.router.navigate(["/sidebar/dialogchat"]);
       })
 
