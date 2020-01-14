@@ -15,7 +15,7 @@ export class SidebarPage implements OnInit {
 
 
    }
- 
+
   constructor(private menu: MenuController, private storageServ: StorageServiceService, public alertController: AlertController, private navCtrl: NavController) {
     this.username = this.storageServ.getName();
     this.pictureUrl = this.storageServ.getPicture();
@@ -38,20 +38,6 @@ export class SidebarPage implements OnInit {
       icon: 'list-box'
     },
     {
-      title: 'events',
-      url: '/sidebar/events-list',
-      icon: 'list-box'
-    },
-    {
-      title: 'add events',
-      url: '/sidebar/events',
-      icon: 'list-box'
-    },
-    {
-      title: 'My projects',
-      child: []
-    },
-    {
       title: 'Logout',
       url: '/login',
       icon: 'log-out'
@@ -60,7 +46,7 @@ export class SidebarPage implements OnInit {
   // projectlist:[{id:string,name:name}]
   private username: string;
   private pictureUrl: string;
-  
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Add a new project name',
