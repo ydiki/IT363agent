@@ -58,7 +58,6 @@ converse(msg: string) {
 
   }
 
-  
   return this.client.textRequest(msg,options)
     .then(res => {
       const speech = res.result.fulfillment.speech;

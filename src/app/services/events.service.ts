@@ -8,7 +8,9 @@ import * as firebase from 'firebase';
 export interface Event {
   id?: string;
   title:string;
-  createdAt: number;
+  startTime: string;
+  message:string;
+  eventId:string;
 }
 
 
@@ -60,9 +62,14 @@ export class EventService {
   }
 
   getEvent(id) {
-    return this.events[id];
-  }
-
+    return new Promise((resolve,reject)=>{
+    firebase.database().ref(`users/${this.userId}/reminders/${id}`).on('value', resp => {
+      console.log(resp.val());
+      
+      resolve(resp.val())
+    });
+  })}
+ 
   updateEvent( id: string,eventId:string) {
     return firebase.database().ref(`users/${this.userId}/reminders/${id}`).set({eventId:eventId});
   }
@@ -86,11 +93,22 @@ export class EventService {
   "July", "August", "September", "October", "November", "December"
 ];
         const date = new Date(item.startTime);
+<<<<<<<
         let string =  String(date.getDate()) + " of " + monthNames[date.getMonth()] + " at " + (date.getHours() > 9 ? '' : '0') + date.getHours() + ":" + (date.getMinutes() > 9 ? '' : '0') + date.getMinutes();
         //console.log(":new Date(item.stratTime)",string);
         let reminder = {id,eventId:item.eventId,startTime:string}
         //console.log("reminder",reminder);
         returnArr.push(reminder);
+=======
+        let string = String(date.getDate()) + " of " + monthNames[date.getMonth()] + " at " + date.getHours() + ":" + date.getMinutes();
+        console.log(":new Date(item.stratTime)",string);
+     //   let reminder = {id,eventId:item.eventId,startTime:string}
+      let reminder = item;
+      reminder['id'] = id;  
+      reminder['startTime'] = string; 
+     console.log("reminder",reminder);
+        returnArr.push({id,reminder});
+>>>>>>>
     });
 
     return returnArr;

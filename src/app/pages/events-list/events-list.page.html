@@ -23,12 +23,12 @@
     </ng-container>
 
     <ion-item-sliding *ngFor="let item of events">
-      <ion-item lines="inset" button [routerLink]="['/events', item.id]">
-        <ion-label>
-          {{ item.startTime.toString() }}
-          <!-- <p>{{ item| date:'short' }}</p> -->
+      <ion-item lines="inset" >
+        <!-- <ion-item lines="inset" button routerDirection="forward" routerLinkActive="active" [routerLink]="['/events', item.id]"> -->
+          <ion-label>
+          {{ item.reminder.title }}
         </ion-label>
-
+        <ion-note slot="end" color="primary">{{ item.reminder.startTime }}</ion-note>
       </ion-item>
 
       <ion-item-options side="end">

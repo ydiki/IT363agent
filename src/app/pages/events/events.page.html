@@ -13,11 +13,12 @@
 <ion-content padding>
   <ion-list lines="full">
     <ion-item>
-      <ion-input required type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+      <ion-text>{{event.title}}</ion-text>
+      <!-- <ion-input required type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input> -->
     </ion-item>
     <ion-item>
-      <ion-input required type="date" placeholder="createdAt" [(ngModel)]="event.createdAt"></ion-input>
+      <!-- <ion-input required type="date" placeholder="createdAt" [(ngModel)]="event.startTime"></ion-input> -->
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="saveEvent()">Save</ion-button>
+  <!-- <ion-button expand="full" (click)="saveEvent()">Save</ion-button> -->
 </ion-content>

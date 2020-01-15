@@ -7,10 +7,10 @@ const routes: Routes = [
   //   path: 'events',
   //   loadChildren: () => import('./pages/events/events.module').then( m => m.EventsPageModule)
   // },
-  // {
-  //   path: 'events/:id',
-  //   loadChildren: () => import('./pages/events/events.module').then( m => m.EventsPageModule)
-  // },
+  {
+    path: 'events/:id',
+    loadChildren: () => import('./pages/events/events.module').then( m => m.EventsPageModule)
+  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)

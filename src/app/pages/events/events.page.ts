@@ -10,11 +10,7 @@ import { NavController, LoadingController } from '@ionic/angular';
   styleUrls: ['./events.page.scss'],
 })
 export class EventsPage implements OnInit {
-  event : Event = {
-    title : '',
-    createdAt: new Date().getTime(),
-    };
-
+  event;
   eventId = null;
   constructor(private route: ActivatedRoute, private nav: NavController, 
     private eventService: EventService, private loadingController: LoadingController) { }
@@ -22,6 +18,7 @@ export class EventsPage implements OnInit {
   ngOnInit() {
     this.eventId = this.route.snapshot.params['id'];
     if (this.eventId)  {
+      console.log("this.eventId",this.eventId);
       this.loadEvent();
     }
   }
@@ -31,10 +28,11 @@ export class EventsPage implements OnInit {
       message: 'Loading event..'
     });
     await loading.present();
- 
-    this.eventService.getEvent(this.eventId).subscribe(res => {
+    
+    this.eventService.getEvent(this.eventId).then(res => {
+     // this.event = res;
+      console.log(this.event);
       loading.dismiss();
-      this.event = res;
     });
   }
  
